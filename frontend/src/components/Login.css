@@ -1,0 +1,76 @@
+.login_section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: lightgray;
+    overflow: hidden;
+    h2 {
+        width: 100%;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        text-shadow: 0 0 3px black;
+        padding: 1rem;
+        margin-top: 100px;
+
+    }
+
+    form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        margin-top: 100px;
+
+        fieldset {
+            padding: 1rem;
+            margin: 1rem;
+            label {
+                margin: 1rem;
+            }
+            input {
+                margin-right: 0.5rem;
+                background-color: rgba(167, 164, 164, 0.461);
+                color: black;
+                border: none;
+                padding: 0.3rem;
+                &::placeholder {
+                    color: black;
+                    opacity: 0.5;
+                }
+            }
+        }
+        button {
+            width: 100%;
+            text-align: center;
+            background-color: #0f0f0fd2;
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            &:hover {
+                color: orange;
+            }
+        }
+    }
+    p {
+        width: 100%;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 0.5rem;
+    }
+    button {
+        width: 100%;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.468);
+        color: black;
+        border: none;
+        padding: 0.5rem;
+        &:hover {
+            color: orange;
+            text-shadow: 0 0 3px black;
+        }
+    }
+}

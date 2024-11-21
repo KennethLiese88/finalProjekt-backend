@@ -1,0 +1,38 @@
+.register_section {
+    height: 88vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.511);
+    color: lightgray;
+    padding: 2rem;
+    overflow: hidden;
+
+    form {
+        background-color: rgba(0, 0, 0, 0.494);
+        padding: 2rem;
+        fieldset {
+            display: flex;
+            flex-direction: column;
+            margin: 0.5rem;
+            label, p {
+                margin: 1rem;
+            }
+            input {
+                margin-right: 0.5rem;
+                background-color: rgba(167, 164, 164, 0.461);
+                color: black;
+                border: none;
+                padding: 0.3rem;
+                &::placeholder {
+                    color: black;
+                    opacity: 0.5;
+                }
+            }
+        }
+    }
+    button {
+        width: 100%;
+        text-align: center;
+    }
+}

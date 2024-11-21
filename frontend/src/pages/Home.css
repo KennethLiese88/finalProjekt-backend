@@ -1,0 +1,16 @@
+body {
+    height: 100vh;
+    background-image: url("https://i.pinimg.com/originals/17/12/3a/17123a088ba7702c2e1556f136ecea41.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    background-color: #0F0F0F;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    padding: 0.5rem;
+}

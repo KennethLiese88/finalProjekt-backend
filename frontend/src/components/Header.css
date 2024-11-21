@@ -4,11 +4,15 @@ header {
     justify-content: space-between;
     align-items: center;
     background-color: #0F0F0F;
+    position: sticky;
+    top: 0;
     color: lightgrey;
     padding: 1.5rem;
 
     .title_field {
         display: flex;
+        border-left: 3px solid lightgray;
+        padding-left: 2rem;
         i {
             display: flex;
             align-items: center;
@@ -18,6 +22,7 @@ header {
 
     .user_field {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         img {
         width: 50px;
@@ -25,6 +30,9 @@ header {
         border-radius: 50%;
         margin-left: 1rem;
         margin-right: 2rem;
+        }
+        button {
+            padding: 0.5rem;
         }
     }
 }

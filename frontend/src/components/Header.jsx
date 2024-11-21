@@ -1,8 +1,14 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import "./Header.css";
 
 export default function Header() {
+    const navigate = useNavigate();
+    
+    function redirect() {
+        navigate("/")
+    }
+
   return (
     <>
         <header>
@@ -13,7 +19,7 @@ export default function Header() {
             <div class='user_field'>
                 <p>Username</p>
                 <img src="https://thumbs.dreamstime.com/b/happy-girl-avatar-funny-child-profile-picture-isolated-white-background-239402901.jpg" alt="user_picture" />
-                <p>Logout</p>
+                <button onClick={redirect}>Logout</button>
             </div>
         </header>
         <Outlet />
