@@ -1,22 +1,48 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 import "./Login.css";
 
 export default function Login({ setRegistered }) {
-  const [loginEmail, setLoginEmail] = useState();
-  const [loginPassword, setLoginPassword] = useState();
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const {setUserData} = useContext(UserContext);
   const navigate = useNavigate();
 
-  function redirect(e) {
+  const formData = {
+    email: loginEmail,
+    password: loginPassword
+  }
+
+  async function loginUser(e) {
     e.preventDefault();
-    navigate("/gallery");
+    try {
+      const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        alert(data.msg);
+      } else {
+        console.log({data});
+        alert(data.msg);
+        setUserData(data)
+        navigate("/gallery");
+      }
+    } catch (error) {
+      console.error("Login fehlgeschlagen:", error);
+    }
   }
 
   return (
     <section className="login_section">
       <hr />
       <h2>Discover Artwork from the Past</h2>
-      <form>
+      <form onSubmit={loginUser}>
         <fieldset>
           <legend>Login to your Account</legend>
           <label>
@@ -44,7 +70,7 @@ export default function Login({ setRegistered }) {
             Password
           </label>
         </fieldset>
-        <button type="submit" onClick={redirect}>Login</button>
+        <button type="submit">Login</button>
       </form>
       <p>Or create a new Account</p>
       <button onClick={() => setRegistered(false)}>Register</button>

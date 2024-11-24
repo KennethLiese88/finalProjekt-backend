@@ -22,7 +22,7 @@ const userSchema = new Schema({
         required: [true, "Password is required"],
         minlength: [8, "Password must be at least 8 characters long"]
     },
-    profilPicture: {
+    profilePicture: {
         type:String, 
         default:null
     }
@@ -33,5 +33,9 @@ userSchema.pre('save', async function (next) {
     this.password = await bcrypt.hash(this.password, 11);
     next();
   });
+
+userSchema.methods.pwValidation = async function(password){
+    return await bcrypt.compare(password, this.password);
+};
 
 export const User = model("User", userSchema);

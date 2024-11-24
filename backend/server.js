@@ -3,7 +3,8 @@ import cors from "cors";
 import atlasConnect from "./config/atlasConnect.js";
 import userRouter from "./routes/userRoutes.js";
 
-atlasConnect();
+atlasConnect(); 
+// check wo und wie lange eine verbindung bestehen soll
 
 const PORT = process.env.PORT;
 

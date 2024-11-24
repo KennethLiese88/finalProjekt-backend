@@ -31,8 +31,18 @@ header {
         margin-left: 1rem;
         margin-right: 2rem;
         }
-        button {
+        .button_on {
             padding: 0.5rem;
+            transition: all 1s ease;
+            &:hover {
+                background-color: purple;
+                color: white;
+            }
+        }
+        .button_off {
+            padding: 0.5rem;
+            opacity: 0.5;
+            cursor: default;
         }
     }
 }

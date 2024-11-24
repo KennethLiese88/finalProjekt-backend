@@ -1,3 +1,4 @@
+import { generateToken } from "../middleware/generateToken.js";
 import { User } from "../models/User.js";
 
 export async function registerUser(req, res) {
@@ -16,8 +17,8 @@ export async function registerUser(req, res) {
     } catch (error) {
         if (error.name === "ValidationError") {
             // Validation errors(messages) put into an array and send back
-            const errors = Object.values(error.errors).map(err => err.message);
-            return res.status(400).json({ msg: "Validation Error", errors });
+            // const errors = Object.values(error.errors).map(err => err.message);
+            return res.status(400).json({ msg: "Validation Error"});
         }
         console.error(error);
         res.status(500).json({ msg: "Server Error" });
@@ -26,7 +27,22 @@ export async function registerUser(req, res) {
 
 export async function loginUser(req, res) {
     try {
-        
+        const {email, password} = req.body;
+        if (!email || !password) {
+            return res.status(400).json({ msg: "Bitte alle Felder ausfüllen!" });
+          }
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ msg: "Benutzer nicht gefunden!" });
+          }
+        const isPasswordValid = await user.pwValidation(password);
+        if (!isPasswordValid) {
+            return res.status(401).json({ msg: "Ungültige Anmeldeinformationen!" });
+          }
+        const token = generateToken({ userId: user._id, username: user.username })
+
+        res.cookie("jwt", token, {httpOnly: true, maxAge: 60*60*1000});
+        res.status(200).json({msg: "Login erfolgreich!", username: user.username});
     } catch (error) {
         console.log(error);
         res.status(500).json({msg:"Server Fehler!"}) 

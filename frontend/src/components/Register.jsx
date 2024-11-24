@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import "./Register.css";
 
 export default function Registeregister({setRegistered}) {
-  const [registerUsername, setRegisterUsername] = useState();
-  const [registerEmail, setRegisterEmail] = useState();
-  const [registerPassword, setRegisterPassword] = useState();
+  const [registerUsername, setRegisterUsername] = useState("");
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
 
   const formData = {
     username: registerUsername,
@@ -22,13 +22,16 @@ export default function Registeregister({setRegistered}) {
         },
         body: JSON.stringify(formData),
       });
-      if (!response.ok) return alert("Invalid or missing Input")
-
       const data = await response.json();
-      alert("Success!")
-      setRegistered(true)
+      if (!response.ok) {
+        alert(data.msg);
+      } else {
+        alert(data.msg);
+        setRegistered(true);
+      }
     } catch (error) {
       console.error("Registrierung fehlgeschlagen:", error);
+      alert("Es gab ein Problem bei der Registrierung. Bitte versuche es später erneut.");
     }
   }
 
@@ -73,9 +76,19 @@ export default function Registeregister({setRegistered}) {
             />
             Password
           </label>
-          <p>Profil Picture</p>
+          {/* <label>
+            <input
+              type="file"
+              id="profilePicture"
+              name="profilePicture"
+              value={}
+              onChange={}
+            />
+            Profile Picture
+          </label> */}
         </fieldset>
       <button onClick={registerNewUser}>Register</button>
+      <button className='back_button' onClick={()=>setRegistered(true)}>go back</button>
       </form>
     </section>
   )

@@ -52,4 +52,14 @@
             color: black;
         }
     }
+    .back_button {
+        font-size: 14px;
+        background-color: rgba(65, 65, 65, 0.455);
+        border: 1px solid rgba(65, 65, 65, 0.455);
+        padding: 3px 0;
+        &:hover {
+            background-color: rgba(128, 128, 128, 0.317);
+            color: lightgray;
+        }
+    }
 }
