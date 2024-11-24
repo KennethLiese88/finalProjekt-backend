@@ -9,7 +9,12 @@
     overflow: hidden;
 
     form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         background-color: rgba(0, 0, 0, 0.494);
+        border: 10px solid rgba(255, 255, 255, 0.039);
         padding: 2rem;
         fieldset {
             display: flex;
@@ -24,15 +29,27 @@
                 color: black;
                 border: none;
                 padding: 0.3rem;
+                transition: background-color 0.3s ease;
                 &::placeholder {
                     color: black;
                     opacity: 0.5;
+                }
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.461);
                 }
             }
         }
     }
     button {
-        width: 100%;
+        width: 96%;
         text-align: center;
+        background-color: lightgray;
+        padding: 0.5rem 0;
+        transition: all 0.3s ease;
+        &:hover {
+            letter-spacing: 0.5rem;
+            background-color: white;
+            color: black;
+        }
     }
 }

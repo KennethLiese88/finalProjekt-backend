@@ -12,7 +12,7 @@ export default function Gallery() {
   return (
     <main>
         {imgArray.map((imgSrc, index) => (
-            <div key={index} class='image_container'>
+            <div key={index} className='image_container'>
                 <img src={imgSrc} alt="img" />
             </div>
         ))}

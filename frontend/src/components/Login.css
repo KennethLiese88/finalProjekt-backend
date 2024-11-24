@@ -37,9 +37,13 @@
                 color: black;
                 border: none;
                 padding: 0.3rem;
+                transition: background-color 0.3s ease;
                 &::placeholder {
                     color: black;
                     opacity: 0.5;
+                }
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.461);
                 }
             }
         }
@@ -50,8 +54,10 @@
             color: white;
             border: none;
             padding: 0.5rem;
+            transition: all 0.3s ease;
             &:hover {
                 color: orange;
+                letter-spacing: 0.5rem;
             }
         }
     }
@@ -68,9 +74,11 @@
         color: black;
         border: none;
         padding: 0.5rem;
+        transition: all 0.3s ease;
         &:hover {
-            color: orange;
-            text-shadow: 0 0 3px black;
+            color: rgb(235, 187, 98);
+            text-shadow: 0 0 6px black,0 0 6px black;
+            letter-spacing: 0.5rem;
         }
     }
 }

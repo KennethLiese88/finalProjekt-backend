@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 export default function Login({ setRegistered }) {
+  const [loginEmail, setLoginEmail] = useState();
+  const [loginPassword, setLoginPassword] = useState();
   const navigate = useNavigate();
 
   function redirect(e) {
@@ -11,7 +13,7 @@ export default function Login({ setRegistered }) {
   }
 
   return (
-    <section class="login_section">
+    <section className="login_section">
       <hr />
       <h2>Discover Artwork from the Past</h2>
       <form>
@@ -22,6 +24,8 @@ export default function Login({ setRegistered }) {
               type="email"
               id="email"
               name="email"
+              value={loginEmail}
+              onChange={(e)=>setLoginEmail(e.target.value)}
               placeholder="Enter your email"
               required
             />
@@ -32,6 +36,8 @@ export default function Login({ setRegistered }) {
               type="password"
               id="password"
               name="password"
+              value={loginPassword}
+              onChange={(e)=>setLoginPassword(e.target.value)}
               placeholder="Enter your password"
               required
             />
