@@ -17,16 +17,32 @@ export async function uploadImage(req, res) {
 export async function allImages(req,res){
     try {
         const { page = 1, limit = 4 } = req.query;
-        const result = await cloudinary.api.resources({
-            type: "upload",
-            prefix: "fileZero",
-            max_results: limit,
-            next_cursor: req.query.next_cursor || undefined
-        })
-        res.status(200).json({
-            images: result.resources.map((img)=> img.secure_url),
-            next_cursor: result.next_cursor,
-        })
+        // const result = await cloudinary.api.resources({
+        //     type: "upload",
+        //     prefix: "fileZero",
+        //     max_results: limit,
+        //     next_cursor: req.query.next_cursor || undefined,
+        //     direction: "asc"
+        // })
+        // const newResult = result.resources.reverse();
+
+        // res.status(200).json({
+        //     images: newResult.map((img)=> img.secure_url),
+        //     next_cursor: result.next_cursor,
+        // })
+
+        const result = await cloudinary.search
+    .expression('folder:fileZero') 
+    .sort_by('created_at', 'desc')      
+    .max_results(limit)                 
+    .next_cursor(req.query.next_cursor) 
+    .execute();
+
+    res.status(200).json({
+        images: result.resources.map((img)=> img.secure_url),
+        next_cursor: result.next_cursor,
+    })
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: "Fehler beim Abrufen der Bilder!" });

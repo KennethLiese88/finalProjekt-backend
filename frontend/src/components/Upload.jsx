@@ -32,7 +32,11 @@ function Upload({ onUploadSuccess, fetchImages }) {
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
-        accept: "image/*", 
+        accept: {
+            'image/jpeg': ['.jpg', '.jpeg'],
+            'image/png': ['.png'],
+            'image/gif': ['.gif']
+        },
         multiple: false, 
     });
 

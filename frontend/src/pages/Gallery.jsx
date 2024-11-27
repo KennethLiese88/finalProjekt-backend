@@ -10,34 +10,71 @@ export default function Gallery() {
   const [overlayImg, setOverlayImg] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const fetchImages = async (cursor = null) => { // page = 1
+  const fetchImages = async (cursor = null) => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `http://localhost:3000/images?limit=4${
-          cursor ? `&next_cursor=${cursor}` : ""
-        }`
-      );
-      // GET http://localhost:3000/images?page=2&limit=12&next_cursor=<next_cursor_value>
+        const response = await fetch(
+            `http://localhost:3000/images?limit=4${
+                cursor ? `&next_cursor=${cursor}` : ""
+            }`
+        );
 
-      const data = await response.json();
-      if (response.ok) {
-        setImages((prev) => {
-          // Verhindert duplizierte Einträge
-          const newImages = data.images.filter((img) => !prev.includes(img));
-          return [...prev, ...newImages];
-        });
-        setNextCursor(data.next_cursor);
-        // setCurrentPage(data.currentPage);
-        // setTotalPages(data.totalPages);
-      }
+        const data = await response.json();
+        console.log(data);
+
+        if (response.ok) {
+            setImages((prev) => {
+                if (!cursor) {
+               
+                    return data.images.reverse();
+                }
+
+                const newImages = data.images.reverse().filter(
+                    (img) => !prev.some((prevImg) => prevImg.url === img.url)
+                );
+                return [...prev, ...newImages];
+            });
+
+            setNextCursor(data.next_cursor || null);
+        }
     } catch (error) {
-      console.error("Fehler beim Abrufen der Bilder:", error);
-      alert("An error occurred while fetching the images.");
+        console.error("Error fetching images:", error);
+        alert("An error occurred while fetching the images.");
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
+
+  // const fetchImages = async (cursor = null) => { // page = 1
+  //   setLoading(true);
+  //   try {
+  //     const response = await fetch(
+  //       `http://localhost:3000/images?limit=4${
+  //         cursor ? `&next_cursor=${cursor}` : ""
+  //       }`
+  //     );
+  //     // GET http://localhost:3000/images?page=2&limit=12&next_cursor=<next_cursor_value>
+
+  //     const data = await response.json();
+  //     console.log(data);
+      
+  //     if (response.ok) {
+  //       setImages((prev) => {
+  //         // Verhindert duplizierte Einträge
+  //         const newImages = data.images.reverse().filter((img) => !prev.includes(img));
+  //         return [...prev, ...newImages];
+  //       });
+  //       setNextCursor(data.next_cursor);
+  //       // setCurrentPage(data.currentPage);
+  //       // setTotalPages(data.totalPages);
+  //     }
+  //   } catch (error) {
+  //     console.error("Fehler beim Abrufen der Bilder:", error);
+  //     alert("An error occurred while fetching the images.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   useEffect(() => {
     fetchImages();
@@ -54,9 +91,11 @@ export default function Gallery() {
   // };
 
   const handleUploadSuccess = (imageUrl) => {
-    setImages((prevImages) => [imageUrl, ...prevImages]);
-    console.log(images);
-    
+    // setImages((prevImages) => [
+    //   { url: imageUrl, created_at: new Date().toISOString() }, 
+    //   ...prevImages,
+    //]);
+    fetchImages();
   };
 
   const openOverlay = (imgSrc) => {
@@ -74,7 +113,7 @@ export default function Gallery() {
           onUploadSuccess={handleUploadSuccess}
           fetchImages={fetchImages}
         />
-        <hr />
+
         {/* <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
