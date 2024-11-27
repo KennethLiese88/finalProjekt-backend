@@ -16,66 +16,32 @@ export async function uploadImage(req, res) {
 
 export async function allImages(req,res){
     try {
-        const { page = 1, limit = 4 } = req.query;
-        // const result = await cloudinary.api.resources({
-        //     type: "upload",
-        //     prefix: "fileZero",
-        //     max_results: limit,
-        //     next_cursor: req.query.next_cursor || undefined,
-        //     direction: "asc"
-        // })
-        // const newResult = result.resources.reverse();
-
-        // res.status(200).json({
-        //     images: newResult.map((img)=> img.secure_url),
-        //     next_cursor: result.next_cursor,
-        // })
+        const { page = 1, limit = 8 } = req.query;
+        const parsedPage = parseInt(page, 10);
+        const parsedLimit = parseInt(limit, 10);
 
         const result = await cloudinary.search
-    .expression('folder:fileZero') 
-    .sort_by('created_at', 'desc')      
-    .max_results(limit)                 
-    .next_cursor(req.query.next_cursor) 
-    .execute();
+            .expression('folder:fileZero') 
+            .sort_by('created_at', 'desc')      
+            .max_results(500) // parsedLimit        
+            .execute();
 
-    res.status(200).json({
-        images: result.resources.map((img)=> img.secure_url),
-        next_cursor: result.next_cursor,
-    })
+        const totalImages = result.resources.length; 
+        const totalPages = Math.ceil(totalImages / parsedLimit);
+
+        const startIndex = (parsedPage - 1) * parsedLimit;
+        const endIndex = startIndex + parsedLimit;
+
+        const images = result.resources.slice(startIndex, endIndex).map(img => img.secure_url);
+
+        res.status(200).json({
+            images,
+            currentPage: parsedPage,
+            totalPages: totalPages,
+        });
 
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: "Fehler beim Abrufen der Bilder!" });
     }
 }
-
-// export async function allImages(req, res) {
-//     try {
-//         const { page = 1, limit = 12 } = req.query;
-//         const parsedPage = parseInt(page, 10);
-//         const parsedLimit = parseInt(limit, 10);
-        
-//         // Hole die Ressourcen aus Cloudinary, wobei die Cursor-basierte Paginierung verwendet wird
-//         const result = await cloudinary.api.resources({
-//             type: "upload",
-//             prefix: "fileZero",
-//             max_results: parsedLimit,
-//             next_cursor: req.query.next_cursor || undefined
-//         });
-
-//         // Berechne die Gesamtzahl der Seiten
-//         const totalImages = result.resources.length;  // Gesamtanzahl der Bilder
-//         const totalPages = Math.ceil(totalImages / parsedLimit); // Gesamtzahl der Seiten
-
-//         // Erstelle die Antwort mit den Bildern und der Paginierung
-//         res.status(200).json({
-//             images: result.resources.map((img) => img.secure_url),
-//             currentPage: parsedPage,  // Aktuelle Seite
-//             totalPages: totalPages,   // Gesamtseitenzahl
-//             next_cursor: result.next_cursor,  // Nächster Cursor, falls vorhanden
-//         });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ msg: "Fehler beim Abrufen der Bilder!" });
-//     }
-// }

@@ -19,8 +19,7 @@ function Upload({ onUploadSuccess, fetchImages }) {
             const data = await response.json();
             if (response.ok) {
                 alert("Upload erfolgreich!");
-                onUploadSuccess(data.imageUrl);
-                fetchImages();
+                onUploadSuccess();
             } else {
                 alert(`Fehler: ${data.msg}`);
             }

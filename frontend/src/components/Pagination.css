@@ -1,0 +1,21 @@
+.pg_button {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.active {
+    width: 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: rgba(128, 0, 128, 0.716);
+    border-radius: 50%;
+    color: #9bc9aa;
+    padding: 0.5rem;
+    margin: 1rem;
+    
+}
