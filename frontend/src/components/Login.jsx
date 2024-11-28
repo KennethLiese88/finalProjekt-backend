@@ -6,13 +6,13 @@ import "./Login.css";
 export default function Login({ setRegistered }) {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const {setUserData} = useContext(UserContext);
+  const { setUserData } = useContext(UserContext);
   const navigate = useNavigate();
 
   const formData = {
     email: loginEmail,
-    password: loginPassword
-  }
+    password: loginPassword,
+  };
 
   async function loginUser(e) {
     e.preventDefault();
@@ -28,13 +28,13 @@ export default function Login({ setRegistered }) {
       if (!response.ok) {
         alert(data.msg);
       } else {
-        console.log({data});
+        console.log({ data });
         alert(data.msg);
-        setUserData(data)
+        setUserData(data);
         navigate("/gallery");
       }
     } catch (error) {
-      console.error("Login fehlgeschlagen:", error);
+      console.error("Login failed:", error);
     }
   }
 
@@ -51,7 +51,7 @@ export default function Login({ setRegistered }) {
               id="email"
               name="email"
               value={loginEmail}
-              onChange={(e)=>setLoginEmail(e.target.value)}
+              onChange={(e) => setLoginEmail(e.target.value)}
               placeholder="Enter your email"
               required
             />
@@ -63,7 +63,7 @@ export default function Login({ setRegistered }) {
               id="password"
               name="password"
               value={loginPassword}
-              onChange={(e)=>setLoginPassword(e.target.value)}
+              onChange={(e) => setLoginPassword(e.target.value)}
               placeholder="Enter your password"
               required
             />

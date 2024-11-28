@@ -1,21 +1,25 @@
 .pg_button {
-    font-size: 1.5rem;
-    font-weight: bold;
-    background-color: transparent;
-    color: white;
-    border: none;
-    padding: 1rem;
-    margin: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 1rem;
+  margin: 1rem;
+  transition: color 0.3s ease;
+  &:hover {
+    color: rgb(122, 176, 122);
+  }
 }
 
 .active {
-    width: 30px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    background-color: rgba(128, 0, 128, 0.716);
-    border-radius: 50%;
-    color: #9bc9aa;
-    padding: 0.5rem;
-    margin: 1rem;
-    
+  width: 30px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: rgba(128, 0, 128, 0.716);
+  border: 2px solid rgb(122, 176, 122);
+  border-radius: 50%;
+  color: rgb(122, 176, 122);
+  padding: 0.5rem;
+  margin: 1rem;
 }

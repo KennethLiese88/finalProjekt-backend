@@ -4,7 +4,7 @@ import "./Pagination.css";
 function Pagination({ currentPage, totalPages, onPageChange }) {
   const createPageNumbers = () => {
     const pages = [];
-    const maxVisiblePages = 5; 
+    const maxVisiblePages = 5;
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
     let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
@@ -28,7 +28,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         disabled={currentPage === 1}
         onClick={() => onPageChange(currentPage - 1)}
       >
-       <i className="fa-solid fa-angle-left"></i> Previous
+        <i className="fa-solid fa-angle-left"></i> Previous
       </button>
       {pages.map((page) => (
         <button
@@ -42,9 +42,11 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       {totalPages > pages[pages.length - 1] && (
         <>
           <span>...</span>
-          <button 
+          <button
             className="pg_button"
-            onClick={() => onPageChange(totalPages)}>{totalPages}
+            onClick={() => onPageChange(totalPages)}
+          >
+            {totalPages}
           </button>
         </>
       )}

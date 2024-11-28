@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "./Register.css";
 
-export default function Registeregister({setRegistered}) {
+export default function Registeregister({ setRegistered }) {
   const [registerUsername, setRegisterUsername] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
@@ -9,11 +9,11 @@ export default function Registeregister({setRegistered}) {
   const formData = {
     username: registerUsername,
     email: registerEmail,
-    password: registerPassword
-  }
+    password: registerPassword,
+  };
 
   async function registerNewUser(e) {
-    e.preventDefault()
+    e.preventDefault();
     try {
       const response = await fetch("http://localhost:3000/register", {
         method: "POST",
@@ -30,13 +30,15 @@ export default function Registeregister({setRegistered}) {
         setRegistered(true);
       }
     } catch (error) {
-      console.error("Registrierung fehlgeschlagen:", error);
-      alert("Es gab ein Problem bei der Registrierung. Bitte versuche es später erneut.");
+      console.error("Registration failed:", error);
+      alert(
+        "There was a problem with the registration. Please try again later."
+      );
     }
   }
 
   return (
-    <section className='register_section'>
+    <section className="register_section">
       <form>
         <fieldset>
           <legend>Register your Account</legend>
@@ -46,7 +48,7 @@ export default function Registeregister({setRegistered}) {
               id="username"
               name="username"
               value={registerUsername}
-              onChange={(e)=>setRegisterUsername(e.target.value)}
+              onChange={(e) => setRegisterUsername(e.target.value)}
               placeholder="Enter your username"
               required
             />
@@ -58,7 +60,7 @@ export default function Registeregister({setRegistered}) {
               id="email"
               name="email"
               value={registerEmail}
-              onChange={(e)=>setRegisterEmail(e.target.value)}
+              onChange={(e) => setRegisterEmail(e.target.value)}
               placeholder="Enter your email"
               required
             />
@@ -70,7 +72,7 @@ export default function Registeregister({setRegistered}) {
               id="password"
               name="password"
               value={registerPassword}
-              onChange={(e)=>setRegisterPassword(e.target.value)}
+              onChange={(e) => setRegisterPassword(e.target.value)}
               placeholder="Enter your password"
               required
             />
@@ -87,9 +89,11 @@ export default function Registeregister({setRegistered}) {
             Profile Picture
           </label> */}
         </fieldset>
-      <button onClick={registerNewUser}>Register</button>
-      <button className='back_button' onClick={()=>setRegistered(true)}>go back</button>
+        <button onClick={registerNewUser}>Register</button>
+        <button className="back_button" onClick={() => setRegistered(true)}>
+          go back
+        </button>
       </form>
     </section>
-  )
+  );
 }

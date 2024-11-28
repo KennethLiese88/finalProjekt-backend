@@ -9,16 +9,15 @@ import UserContextProvider from "./context/UserContext";
 function App() {
   return (
     <>
-    <UserContextProvider>
-      <Routes>
-        <Route path="/" element={<Header />}>
-          <Route index element={<Home />} />
-          <Route path="/gallery" element={<Gallery />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </UserContextProvider>
-      
+      <UserContextProvider>
+        <Routes>
+          <Route path="/" element={<Header />}>
+            <Route index element={<Home />} />
+            <Route path="/gallery" element={<Gallery />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </UserContextProvider>
     </>
   );
 }

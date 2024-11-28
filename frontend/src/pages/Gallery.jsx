@@ -13,15 +13,17 @@ export default function Gallery() {
   const fetchImages = async (page = 1) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/images?page=${page}&limit=8`);
+      const response = await fetch(
+        `http://localhost:3000/images?page=${page}&limit=8`
+      );
       const data = await response.json();
       console.log(data);
 
-    if (response.ok) {
-      setImages(data.images);
-      setCurrentPage(data.currentPage);
-      setTotalPages(data.totalPages);
-    }
+      if (response.ok) {
+        setImages(data.images);
+        setCurrentPage(data.currentPage);
+        setTotalPages(data.totalPages);
+      }
     } catch (error) {
       console.error("Error fetching images:", error);
       alert("An error occurred while fetching the images.");
@@ -66,17 +68,21 @@ export default function Gallery() {
         />
 
         <section className="gallery_section">
-          {loading
-            ? <p><i className="fa-solid fa-fan fa-spin"></i> loading... </p>
-            : images.map((imgSrc, index) => (
-                <div key={index} className="image_container">
-                  <img
-                    src={imgSrc}
-                    alt={`img-${index}`}
-                    onClick={() => openOverlay(imgSrc)}
-                  />
-                </div>
-              ))}
+          {loading ? (
+            <p>
+              <i className="fa-solid fa-fan fa-spin"></i> loading...{" "}
+            </p>
+          ) : (
+            images.map((imgSrc, index) => (
+              <div key={index} className="image_container">
+                <img
+                  src={imgSrc}
+                  alt={`img-${index}`}
+                  onClick={() => openOverlay(imgSrc)}
+                />
+              </div>
+            ))
+          )}
         </section>
 
         {/* Overlay */}
