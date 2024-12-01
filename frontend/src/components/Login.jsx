@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import "./Login.css";
+import { toast } from "react-toastify";
 
 export default function Login({ setRegistered }) {
   const [loginEmail, setLoginEmail] = useState("");
@@ -26,10 +27,9 @@ export default function Login({ setRegistered }) {
       });
       const data = await response.json();
       if (!response.ok) {
-        alert(data.msg);
+        toast.error(data.msg);
       } else {
-        console.log({ data });
-        alert(data.msg);
+        toast.success(data.msg);
         setUserData(data);
         navigate("/gallery");
       }

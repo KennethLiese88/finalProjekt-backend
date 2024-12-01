@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Register.css";
+import { toast } from "react-toastify";
 
 export default function Registeregister({ setRegistered }) {
   const [registerUsername, setRegisterUsername] = useState("");
@@ -24,9 +25,9 @@ export default function Registeregister({ setRegistered }) {
       });
       const data = await response.json();
       if (!response.ok) {
-        alert(data.msg);
+        toast.error(data.msg);
       } else {
-        alert(data.msg);
+        toast.success(data.msg);
         setRegistered(true);
       }
     } catch (error) {

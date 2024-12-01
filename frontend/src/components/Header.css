@@ -47,3 +47,21 @@ header {
     }
   }
 }
+
+@media only screen and (max-width: 630px) {
+  .title_field {
+    i {
+      color: transparent;
+    }
+  }
+  .user_field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    img {
+      display: none;
+    }
+  }
+}

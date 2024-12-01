@@ -1,4 +1,5 @@
 import { useDropzone } from "react-dropzone";
+import { toast } from "react-toastify";
 
 function Upload({ onUploadSuccess, fetchImages }) {
   const onDrop = async (acceptedFiles, rejectedFiles) => {
@@ -17,10 +18,10 @@ function Upload({ onUploadSuccess, fetchImages }) {
       });
       const data = await response.json();
       if (response.ok) {
-        alert("Upload success!");
+        toast.success("Upload success!");
         onUploadSuccess();
       } else {
-        alert(`Error: ${data.msg}`);
+        toast.error(`Error: ${data.msg}`);
       }
     } catch (error) {
       console.error("Upload failed:", error);
