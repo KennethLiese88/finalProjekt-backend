@@ -23,3 +23,18 @@
   padding: 0.5rem;
   margin: 1rem;
 }
+
+@media only screen and (max-width: 360px) {
+  .pg_button {
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+  }
+  .active {
+    width: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin: 1rem;
+  }
+}
